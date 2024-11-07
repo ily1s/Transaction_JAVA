@@ -3,7 +3,7 @@ package org.example;
 import java.sql.Timestamp;
 
 public class Transaction {
-    public enum Type {VIRINT, VIREST, VIRMULTA}
+    public enum Type {VIRINT, VIREST, VIRMULTA, VIRCHA}
 
     private String type;
     private Timestamp timestamp;
@@ -27,15 +27,18 @@ public class Transaction {
     }
 
     public Type getType() {
-        // VirInt: same bank code
-        // VirEst: same country different bank
-        // VirMulta: different Countries
-        if (sourceBanque.getBankName().equals(destinationBanque.getBankName()) && paysSource.equals(paysDestination)) {
-            return Type.VIRINT;  // Same bank
-        } else if (!sourceBanque.getBankName().equals(destinationBanque.getBankName()) && paysSource.equals(paysDestination)) {
-            return Type.VIREST;  // Different banks
-        } else if (!paysSource.equals(paysDestination)) {
-            return Type.VIRMULTA;  //Diffrent country
+        // VirInt: same bank
+        // VirEst: same country
+        // VirMulta: different banks same country
+        // VirCha: different banks different Countries
+        if (!sourceBanque.getBankName().equals(destinationBanque.getBankName()) && !paysSource.equals(paysDestination)) {
+            return Type.VIRCHA;
+        }else if (!sourceBanque.getBankName().equals(destinationBanque.getBankName()) && paysSource.equals(paysDestination)) {
+            return Type.VIRMULTA;
+        }else if (sourceBanque.getBankName().equals(destinationBanque.getBankName())) {
+            return Type.VIRINT;
+        } else if (paysSource.equals(paysDestination)){
+            return Type.VIREST;
         }
         return null;
     }
