@@ -5,11 +5,18 @@ import java.util.List;
 
 public class Compte {
     private int numcompte;
+    private double solde;
     private Timestamp dateCreation;
     private Timestamp dateupdate;
-    private String devise;
     private Client client;
     private List<Transaction> transactions;
+
+    public Compte(int numcompte, double solde, Timestamp dateCreation, Timestamp dateupdate) {
+        this.numcompte = numcompte;
+        this.solde = solde;
+        this.dateCreation = dateCreation;
+        this.dateupdate = dateupdate;
+    }
 
     public int getNumcompte() {
         return numcompte;
@@ -23,8 +30,8 @@ public class Compte {
         return dateupdate;
     }
 
-    public String getDevise() {
-        return devise;
+    public double getSolde() {
+        return solde;
     }
 
     public void setNumcompte(int numcompte) {
@@ -39,7 +46,7 @@ public class Compte {
         this.dateupdate = dateupdate;
     }
 
-    public void setDevise(String devise) {
-        this.devise = devise;
+    public void setSolde(double solde) {
+        this.solde = solde;
     }
 }
