@@ -3,7 +3,7 @@ package org.example;
 import java.util.List;
 
 public class Client {
-    private int numClient;
+    private String numClient;
     private String nom;
     private String prenom;
     private String adresse;
@@ -11,20 +11,19 @@ public class Client {
     private String email;
     private List<Compte> comptes;
 
-    public Client(int numClient, String nom, String prenom, String adresse, String telephone, String email) {
+    // No-argument constructor (required for Jackson)
+    public Client() {}
+
+    public Client(String numClient, String nom) {
         this.numClient = numClient;
         this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.telephone = telephone;
-        this.email = email;
     }
 
-    public int getNumClient() {
+    public String getNumClient() {
         return numClient;
     }
 
-    public String getNom() {
+    public String getNomClient() {
         return nom;
     }
 
@@ -44,7 +43,7 @@ public class Client {
         return email;
     }
 
-    public void setNumClient(int numClient) {
+    public void setNumClient(String numClient) {
         this.numClient = numClient;
     }
 

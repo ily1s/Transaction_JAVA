@@ -2,23 +2,22 @@ package org.example;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 public class Compte {
-    private int numcompte;
+    private String numcompte;
     private double solde;
     private Timestamp dateCreation;
     private Timestamp dateupdate;
     private Client client;
     private List<Transaction> transactions;
 
-    public Compte(int numcompte, double solde, Timestamp dateCreation, Timestamp dateupdate) {
+    public Compte(String numcompte, double solde) {
         this.numcompte = numcompte;
         this.solde = solde;
-        this.dateCreation = dateCreation;
-        this.dateupdate = dateupdate;
     }
 
-    public int getNumcompte() {
+    public String getNumCompte() {
         return numcompte;
     }
 
@@ -34,7 +33,7 @@ public class Compte {
         return solde;
     }
 
-    public void setNumcompte(int numcompte) {
+    public void setNumcompte(String numcompte) {
         this.numcompte = numcompte;
     }
 

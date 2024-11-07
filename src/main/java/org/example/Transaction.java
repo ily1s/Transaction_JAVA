@@ -16,10 +16,7 @@ public class Transaction {
     private String paysSource;
     private String paysDestination;
 
-    public Transaction(String type, Timestamp timestamp, int reference, Compte sourceCompte, Compte destinationCompte, double montant, Bank sourceBanque, Bank destinationBanque, String paysSource, String paysDestination) {
-        this.type = type;
-        this.timestamp = timestamp;
-        this.reference = reference;
+    public Transaction(Compte sourceCompte, Compte destinationCompte, double montant, Bank sourceBanque, Bank destinationBanque, String paysSource, String paysDestination) {
         this.sourceCompte = sourceCompte;
         this.destinationCompte = destinationCompte;
         this.montant = montant;
@@ -29,28 +26,18 @@ public class Transaction {
         this.paysDestination = paysDestination;
     }
 
-
     public Type getType() {
         // VirInt: same bank code
         // VirEst: same country different bank
         // VirMulta: different Countries
-        if (sourceBanque.equals(destinationBanque)) {
+        if (sourceBanque.getBankName().equals(destinationBanque.getBankName()) && paysSource.equals(paysDestination)) {
             return Type.VIRINT;  // Same bank
-        } else if (!sourceBanque.equals(destinationBanque)) {
+        } else if (!sourceBanque.getBankName().equals(destinationBanque.getBankName()) && paysSource.equals(paysDestination)) {
             return Type.VIREST;  // Different banks
         } else if (!paysSource.equals(paysDestination)) {
             return Type.VIRMULTA;  //Diffrent country
         }
-        return null;  // In case none of the conditions are met
-    }
-
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public int getReference() {
-        return reference;
+        return null;
     }
 
     public Compte getSourceCompte() {
@@ -79,45 +66,5 @@ public class Transaction {
 
     public String getPaysDestination() {
         return paysDestination;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public void setReference(int reference) {
-        this.reference = reference;
-    }
-
-    public void setSourceCompte(Compte sourceCompte) {
-        this.sourceCompte = sourceCompte;
-    }
-
-    public void setDestinationCompte(Compte destinationCompte) {
-        this.destinationCompte = destinationCompte;
-    }
-
-    public void setMontant(double montant) {
-        this.montant = montant;
-    }
-
-    public void setSourceBanque(Bank sourceBanque) {
-        this.sourceBanque = sourceBanque;
-    }
-
-    public void setDestinationBanque(Bank destinationBanque) {
-        this.destinationBanque = destinationBanque;
-    }
-
-    public void setPaysSource(String paysSource) {
-        this.paysSource = paysSource;
-    }
-
-    public void setPaysDestination(String paysDestination) {
-        this.paysDestination = paysDestination;
     }
 }
